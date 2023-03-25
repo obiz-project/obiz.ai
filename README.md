@@ -1,6 +1,8 @@
 # OBIZ.ai Alpha
 ### OBIZ.ai Alpha is an open-source lightweight Python chat AI designed to be simple and effective without the need for internet connectivity. The acronym OBIZ stands for Optimal Basic Intelligence Zero, highlighting the goal of providing a basic but optimal chat AI that requires no external resources.
 
+Current edition: [Replit]("https://replit.com/@Obiz1/Obiz-ai#main.py")
+
 ## Features
 Easy to use and deploy
 Lightweight and fast
@@ -32,3 +34,5 @@ OBIZ.ai Alpha is an open-source project, and contributions are always welcome. T
 
 ## License
 OBIZ.ai Alpha is released under the MIT License, which means that you are free to use, modify, and distribute the code as you see fit. However, we ask that you credit the original authors and provide a link back to the original repository.
+
+
