@@ -5,31 +5,42 @@ import random
 import keyboard
 import time
 
+# Function to create the chat history label, scrollbar, and text box
+def create_chat_history_widgets(window):
+    # Create a label for the chat history
+    chat_history_label = tk.Label(
+        window,
+        text="Chat History",
+        font=("Helvetica", 16, "bold"),
+        bg="#36393F",
+        fg="#DCDDDE"
+    )
+    chat_history_label.pack()
+
+    # Create a scrollbar for the chat history
+    chat_history_scrollbar = tk.Scrollbar(window)
+    chat_history_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+    # Create a text box for the chat history
+    chat_history_text = tk.Text(
+        window,
+        height=20,
+        bg="#36393F",
+        fg="#DCDDDE",
+        font=("Helvetica", 12),
+        state="disabled",
+        yscrollcommand=chat_history_scrollbar.set
+    )
+    chat_history_text.pack(pady=10)
+
+    return chat_history_text, chat_history_scrollbar
+
 # Create the main window
 root = tk.Tk()
 root.title("obiz.ai")
 
-# Create a label for the chat history
-chat_history_label = tk.Label(root,
-                              text="Chat History",
-                              font=("Helvetica", 16, "bold"),
-                              bg="#36393F",
-                              fg="#DCDDDE")
-chat_history_label.pack()
-
-# Create a scrollbar for the chat history
-chat_history_scrollbar = tk.Scrollbar(root)
-chat_history_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-
-# Create a text box for the chat history
-chat_history_text = tk.Text(root,
-                            height=20,
-                            bg="#36393F",
-                            fg="#DCDDDE",
-                            font=("Helvetica", 12),
-                            state="disabled",
-                            yscrollcommand=chat_history_scrollbar.set)
-chat_history_text.pack(pady=10)
+# Create the chat history widgets
+chat_history_text, chat_history_scrollbar = create_chat_history_widgets(root)
 
 # Set the chat history scrollbar to scroll the text box
 chat_history_scrollbar.config(command=chat_history_text.yview)
@@ -70,16 +81,6 @@ def clear_chat_history():
         chat_history_text.update()
         chat_history_text.after(50)
 
-
-# Create a function to respond to user
-def response():
-    with open('speech_words.txt', 'r') as f:
-        words = f.read().splitlines()
-    sentence = ''
-    for i in range(random.randint(5, 10)):
-        sentence += random.choice(words) + ' '
-    return sentence.capitalize().strip()
-
   # Bind the Enter key to the send_chat_message function
 root.bind('<Return>', lambda event: send_chat_message())
 
@@ -95,6 +96,15 @@ def send_chat_message():
      # Code to send the message to the chat system goes here
 
 keyboard.add_hotkey('enter', send_chat_message)
+
+   # Create a function to respond to user
+def response():
+    with open('speech_words.txt', 'r') as f:
+        words = f.read().splitlines()
+    sentence = ''
+    for i in range(random.randint(5, 10)):
+        sentence += random.choice(words) + ' '
+    return sentence.capitalize().strip()
 
 
 # Create a function to handle sending a chat message
@@ -125,9 +135,7 @@ def send_chat_message():
         chat_history_text.configure(state="normal", fg="#799A80")
         chat_history_text.insert("end", "\b\b\b\n" + "Obiz: \n" + response_text + "\n\n", "left_align")
         chat_history_text.configure(state="disabled")
-
-
-
+        
 # Create a button to clear the chat history
 clear_button = tk.Button(root,
                          text="Clear",
