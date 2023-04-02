@@ -1,6 +1,8 @@
 import time
 import os
 import random
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 '''
 Ansi Colors // change the colors displayed on the terminal
@@ -86,6 +88,34 @@ def response(user_input): #response handling
             print(white)
             for i in range(1,2):
               print("\n")
+        if "search" in user_input:
+            for i in range(1,2):
+                print("\n")
+            print(green)
+            new_user_input = user_input.replace("search","")
+            print("searching the web for ", new_user_input)
+            for i in range(1,2):
+                print("\n")
+            driver = webdriver.Chrome()
+            driver.get("https://www.google.com")
+            search_box = driver.find_element("q")
+            search_box.send_keys(new_user_input)
+            search_box.submit()
+        if "compass" in user_input:
+            for i in range(1,2):
+                print("\n")
+            print(green)
+            new_user_input = user_input.replace("search","")
+            print("Opening Compass")
+            for i in range(1,2):
+                print("\n")
+            driver = webdriver.Chrome()
+            driver.get("https://compass.education")
+            driver.maximize_window()
+            time.sleep(20)
+            driver.close()
+            print("execution successful")
+             
     
 
 def get_message():
