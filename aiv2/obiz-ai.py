@@ -54,7 +54,6 @@ def require_input(): #input management
    user_input = input("What can I do for you?: ")
    user_input = user_input.lower()
    print(white)
-   loading()
    print("#"*80)
    print("\n")
    print(magenta)
@@ -80,10 +79,10 @@ def response(user_input): #response handling
             for i in range(1,2):
               print("\n")
             print(green)
-            with open('greetings.txt', 'r') as file:
+            with open('/Users/student/Documents/GitHub/obiz.ai/aiv2/greetings.txt', 'r') as file: #change this to your specified path
               responses_ai = file.readlines()
-            response_ai = random.choice(responses_ai)
-            print(response_ai)
+              response_ai = random.choice(responses_ai)
+            print(response_ai +', how can I help you')
             print(white)
             for i in range(1,2):
               print("\n")
